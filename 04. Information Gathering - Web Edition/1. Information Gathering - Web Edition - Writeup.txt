@@ -25,9 +25,6 @@
     [!] Answer: "nicadmin@netflix.com"
 
 
-************************************************************************************************************************************************************************************************************************************************************
-
-
 [DNS]
 
 [Question 1] Which IP address maps to inlanefreight.com?
@@ -52,7 +49,8 @@
 
     # nslookup -query=PTR 173.0.87.51
 
-    [?] nslookup -query=PTR <IP>: Identify the PTR record (also known as a pointer record, is a type of DNS record that maps an IP address to a domain name) for the target IP address 
+    [?] nslookup -query=PTR <IP>: Identify the PTR record (also known as a pointer record, 
+        is a type of DNS record that maps an IP address to a domain name) for the target IP address 
 
         Server:         203.113.131.2
         Address:        203.113.131.2#53
@@ -68,7 +66,8 @@
 
     # dig mx paypal.com @8.8.8.8
 
-    [?] dig mx $TARGET @<nameserver/IP>: Identify the MX records (type of DNS record that specifies the mail server responsible for accepting email messages on behalf of a domain) for the target domain.
+    [?] dig mx $TARGET @<nameserver/IP>: Identify the MX records for the target domain.
+        (MX: type of DNS record that specifies the mail server responsible for accepting email messages on behalf of a domain) 
     
     [?] "@8.8.8.8" : Specifying the DNS server to use for the DNS lookup (or you can use 1.1.1.1 _ Cloudfare).
         ...
@@ -85,9 +84,6 @@
     [!] Answer: "mx1.paypalcorp.com"
 
 
-************************************************************************************************************************************************************************************************************************************************************
-
-
 [Active Infrastructure Identification]
 
 [*] Target: 10.129.16.163
@@ -101,7 +97,8 @@
     [#] I know, I know! you are stuck on here right, you are thinking "How? I can't access these vHosts even from my Parrot instance"
         My friends, all you need to do is follow my tutorial
 
-    [Tutorial] As you already know, the path of DNS goes through tons of things (like IPS, root server, TLD server ...), and in this case it just a temporary target in HTB 's Network
+    [Tutorial] As you already know, the path of DNS goes through tons of things (like IPS, root server, TLD server ...)
+               ( and in this case it just a temporary target in HTB 's Network )
                So you can't just normally search this domain like any other domain => you should configure /etc/hosts a little bit
 
                 127.0.0.1       localhost
@@ -114,7 +111,7 @@
                 ff02::1 ip6-allnodes
                 ff02::2 ip6-allrouters
 
-            => I think you understand this =)) 
+            => I think you understand this
 
     # curl app.inlanefreight.local -I
         
@@ -127,18 +124,19 @@
 
 [Question 2]  Which CMS is used on app.inlanefreight.local? (Format: word)
 
-    -   Download Wappalyzer extension then check for the technologies of the web you are visiting (in this case is app.inlanefreight.local) => "CMS": "Joomla"
+    -   Download Wappalyzer extension then check for the technologies of the web you are visiting (in this case is app.inlanefreight.local) 
+    
+        => "CMS": "Joomla"
 
     [!] Answer: "Joomla"
 
 [Question 3]  On which operating system is the dev.inlanefreight.local webserver running on? (Format: word)
 
-    -   Download Wappalyzer extension then check for the technologies of the web you are visiting (in this case is dev.inlanefreight.local) => "Operating systems": "Ubuntu"
+    -   Download Wappalyzer extension then check for the technologies of the web you are visiting (in this case is dev.inlanefreight.local) 
+        
+        => "Operating systems": "Ubuntu"
 
     [!] Answer: "Ubuntu"
-
-
-************************************************************************************************************************************************************************************************************************************************************
 
 
 [Active Subdomain Enumeration]
@@ -172,9 +170,8 @@
 
     -   So "the zone transfer is how a secondary DNS server receives information from the primary DNS server and updates it" right
 
-        => AXFR (short for "Authority Transfer") is a type of DNS zone transfer that allows a secondary DNS server to retrieve a complete copy of a DNS zone file from the primary DNS server
-
-    (Note: IXFR is an optimized version of the AXFR protocol, which only transfers the changes (or "incremental updates") to the DNS zone file since the last transfer)
+        => AXFR (short for "Authority Transfer") is a type of DNS zone transfer that allows 
+           a secondary DNS server to retrieve a complete copy of a DNS zone file from the primary DNS server
 
     # dig axfr inlanefreight.htb @10.129.222.149
 
@@ -253,23 +250,7 @@
     careers.inlanefreight.htb. 604800 IN    A       10.10.34.50
     dc1.inlanefreight.htb.  604800  IN      A       10.10.34.16
     dc2.inlanefreight.htb.  604800  IN      A       10.10.34.11
-    internal.inlanefreight.htb. 604800 IN   A       127.0.0.1
-    admin.internal.inlanefreight.htb. 604800 IN A   10.10.1.11
-    wsus.internal.inlanefreight.htb. 604800 IN A    10.10.1.240
-    ir.inlanefreight.htb.   604800  IN      A       10.10.45.5
-    dev.ir.inlanefreight.htb. 604800 IN     A       10.10.45.6
-    ns.inlanefreight.htb.   604800  IN      A       127.0.0.1
-    resources.inlanefreight.htb. 604800 IN  A       10.10.34.100
-    securemessaging.inlanefreight.htb. 604800 IN A  10.10.34.52
-    test1.inlanefreight.htb. 604800 IN      A       10.10.34.101
-    us.inlanefreight.htb.   604800  IN      A       10.10.200.5
-    cluster14.us.inlanefreight.htb. 604800 IN A     10.10.200.14
-    messagecenter.us.inlanefreight.htb. 604800 IN A 10.10.200.10
-    ww02.inlanefreight.htb. 604800  IN      A       10.10.34.112
-    www1.inlanefreight.htb. 604800  IN      A       10.10.34.111
-    dev.admin.internal.inlanefreight.htb. 604800 IN A 10.10.1.2
-    panel.admin.internal.inlanefreight.htb. 604800 IN A 10.10.1.2
-    printer.admin.internal.inlanefreight.htb. 604800 IN A 10.10.1.3
+    ...
     dc3.internal.inlanefreight.htb. 604800 IN A     10.10.1.5
     ns.internal.inlanefreight.htb. 604800 IN A      127.0.0.1
     ns2.internal.inlanefreight.htb. 604800 IN A     10.10.34.136
@@ -277,9 +258,6 @@
     ws2.internal.inlanefreight.htb. 604800 IN A     10.10.3.12
 
     [!] Answer: "27"
-
-
-************************************************************************************************************************************************************************************************************************************************************
 
 
 [Virtual Hosts]
@@ -292,13 +270,18 @@
 
     -   A virtual host (vHost) is a feature that allows multiple websites to be hosted on a single server.
 
-    -   For IP-based virtual hosting, multiple IP addresses can be assigned to a single host, and different servers can be addressed under different IP addresses.
+    -   For IP-based virtual hosting, multiple IP addresses can be assigned to a single host,
+        and different servers can be addressed under different IP addresses.
 
-    -   For name-based virtual hosting, multiple websites share the same IP address, and the web server uses the domain name specified in the client's request to determine which website to serve
+    -   For name-based virtual hosting, multiple websites share the same IP address, 
+        and the web server uses the domain name specified in the client's request to determine which website to serve
 
-    =>  In this case, they gave us 1 IP in their private network and one of its FQDN (www.inlanefreight.htb), so I think this 's some kind of name-based virtual hosting, maybe they just want us to enumerate subdomain
+    =>  In this case, they gave us 1 IP in their private network and one of its FQDN (www.inlanefreight.htb), 
+        so I think this 's some kind of name-based virtual hosting, maybe they just want us to enumerate subdomain
 
-    =>  For example, we can't just go to private.inlanefreight.htb (because there is no name server for this domain), the request needs to be sent to the IP address 10.129.66.235, then the server must treat the request as if it had been sent to "private.inlanefreight.htb"
+    =>  For example, we can't just go to private.inlanefreight.htb (because there is no name server for this domain), 
+        the request needs to be sent to the IP address 10.129.66.235, then the server must treat the request 
+        as if it had been sent to "private.inlanefreight.htb"
 
     =>  How can we do that? Just look at this " curl http://10.129.66.235  -H "Host: private.inlanefreight.htb" "
 
@@ -436,9 +419,6 @@
         </body>
 
     [!] Answer: "HTB{7zbnr4i3n7zhrxn347zhh3dnrz4dh7zdjfbgn6d}"
-
-
-************************************************************************************************************************************************************************************************************************************************************
 
 
 [Information Gathering - Web - Skills Assessment]

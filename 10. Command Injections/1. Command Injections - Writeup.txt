@@ -9,9 +9,6 @@
     [!] Answer: "Please match the requested format"
 
 
-************************************************************************************************************************************************************************************************************************************************************
-
-
 [Injecting Commands]
 
 [*] Target: 104.248.163.163:31891
@@ -28,21 +25,20 @@
         19    </form>
         ...
 
-        [?] "pattern" attribute takes a regular expression pattern as its value and can be applied to various input types such as text, email, and password fields. 
-                    It helps ensure that user input matches the specified pattern before the form can be submitted.
-                    In this case, the given pattern appears to be a regular expression pattern that validates an IP address
+        [?] "pattern" attribute takes a regular expression pattern as its value and can be applied to 
+                      various input types such as text, email, and password fields. 
+                      It helps ensure that user input matches the specified pattern before the form can be submitted.
+                      In this case, the given pattern appears to be a regular expression pattern that validates an IP address
 
     [!] Answer: "17"
-
-
-************************************************************************************************************************************************************************************************************************************************************
 
 
 [Other Injection Operators]
 
 [*] Target: 104.248.163.163:31891
 
-[Question 1] Try using the remaining three injection operators (new-line, &, |), and see how each works and how the output differs. Which of them only shows the output of the injected command?
+[Question 1] Try using the remaining three injection operators (new-line, &, |), and see how each works and how the output differs. 
+             Which of them only shows the output of the injected command?
 
         [1st Try] I used "127.0.0.1 \n pwd" => Nothing
 
@@ -61,9 +57,6 @@
         [3rd Try] I used "127.0.0.1 | pwd" => /var/www/html
 
     [!] Answer: "|"
-
-
-************************************************************************************************************************************************************************************************************************************************************
 
 
 [Identifying Filters]
@@ -91,9 +84,6 @@
                 </pre>
 
     [!] Answer: "new-line"
-
-
-************************************************************************************************************************************************************************************************************************************************************
 
 
 [Bypassing Space Filters]
@@ -125,9 +115,6 @@
     [!] Answer: "1613"
 
 
-************************************************************************************************************************************************************************************************************************************************************
-
-
 [Bypassing Other Blacklisted Characters]
 
 [*] Target: 143.110.166.117:30217
@@ -142,7 +129,8 @@
            [+] echo ${LS_COLORS:10:1} <=> ";"
 
     Windows: [+] echo %HOMEPATH: <=> \Users\thinh
-                 => echo %homepath:~0,-11% <=> "\" (starting position (~0 -> \Users\thinh), and finally specifying a negative end position, which in this case is the length of "Users\thinh" (-11 -> "\"))
+                 => echo %homepath:~0,-11% <=> "\" (starting position (~0 -> \Users\thinh), and finally specifying a negative end position, 
+                    which in this case is the length of "Users\thinh" (-11 -> "\"))
 
     PS (Windows): [+] $env:HOMEPATH[0] => "\"
 
@@ -157,9 +145,6 @@
     1nj3c70r
 
     [!] Answer: "1nj3c70r"
-
-
-************************************************************************************************************************************************************************************************************************************************************
 
 
 [Bypassing Blacklisted Commands]
@@ -192,14 +177,12 @@
     [!] Answer: "HTB{b451c_f1l73r5_w0n7_570p_m3}"
 
 
-************************************************************************************************************************************************************************************************************************************************************
-
-
 [Advanced Command Obfuscation]
 
 [*] Target: 178.62.9.40:31959 
 
-[Question 1] Find the output of the following command using one of the techniques you learned in this section: find /usr/share/ | grep root | grep mysql | tail -n 1
+[Question 1] Find the output of the following command using one of the techniques you learned in this section: 
+             find /usr/share/ | grep root | grep mysql | tail -n 1
 
     -   Oke! In this section we know that base64 can be used to bypass the blacklist, so instead of using 
 
@@ -220,9 +203,6 @@
         <=> /usr/share/mysql/debian_create_root_user.sql
 
     [!] Answer: "/usr/share/mysql/debian_create_root_user.sql"
-
-
-************************************************************************************************************************************************************************************************************************************************************
 
 
 [Skills Assessment]

@@ -15,9 +15,6 @@
     [!] Answer: "HTB{64$!c_cURL_u$3r}"
 
 
-************************************************************************************************************************************************************************************************************************************************************
-
-
 [HTTP Requests and Responses]
 
 [*] Target: 157.245.41.35:31761
@@ -30,7 +27,7 @@
 
     [!] Answer: "GET"
 
-[Question 2] Send a GET request to the above server, and read the response headers to find the version of Apache running on the server, then submit it as the answer. (answer format: X.Y.ZZ)
+[Question 2] Send a GET request to the above server, and read the response headers to find the version of Apache running on the server
 
     # curl 157.245.41.35:31761 -I => "... Server: Apache/2.4.41 (Ubuntu) ..."
 
@@ -39,14 +36,12 @@
     [!] Answer: "2.4.41"
 
 
-************************************************************************************************************************************************************************************************************************************************************
-
-
 [HTTP Headers]
 
 [*] Target: 209.97.184.215:32197
 
-[Question 1] The server above loads the flag after the page is loaded. Use the Network tab in the browser devtools to see what requests are made by the page, and find the request to the flag.
+[Question 1] The server above loads the flag after the page is loaded. 
+             Use the Network tab in the browser devtools to see what requests are made by the page, and find the request to the flag.
 
     -   Go to http://209.97.184.215:32197/, open Network tab then reload the webpage 
 
@@ -57,16 +52,14 @@
     [!] Answer: "HTB{p493_r3qu3$t$_m0n!t0r}"
 
 
-************************************************************************************************************************************************************************************************************************************************************
-
-
 [GET]
 
 [*] Target: 157.245.38.221:30643
 
 [*] Authenticate to 157.245.38.221 with user "admin" and password "admin"
 
-[Question 1] The exercise above seems to be broken, as it returns incorrect results. Use the browser devtools to see what request it is sending when we search, and use cURL to search for 'flag' and obtain the flag.
+[Question 1] The exercise above seems to be broken, as it returns incorrect results. 
+             Use the browser devtools to see what request it is sending when we search, and use cURL to search for 'flag' and obtain the flag.
 
     [Step 1] Gather "admin" user's identity
 
@@ -91,9 +84,6 @@
             [?] -i: Only show the response header and body
 
     [!] Answer: "HTB{curl_g3773r}"
-
-
-************************************************************************************************************************************************************************************************************************************************************
 
 
 [POST]
@@ -142,9 +132,6 @@
             [?] -b '<cookie>': Set request cookie
 
     [!] Answer: "HTB{p0$t_r3p34t3r}"
-
-
-************************************************************************************************************************************************************************************************************************************************************
 
 
 [CRUD API]

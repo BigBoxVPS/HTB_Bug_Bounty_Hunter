@@ -2,7 +2,8 @@
 
 [*] Target: 138.68.170.86:31296
 
-[Question 1] Try intercepting the ping request on the server shown above, and change the post data similarly to what we did in this section. Change the command to read 'flag.txt'
+[Question 1] Try intercepting the ping request on the server shown above, and change the post data similarly to what we did in this section. 
+             Change the command to read 'flag.txt'
 
     [Step 1] Intercepting the ping request
 
@@ -20,9 +21,6 @@
         -   Change a little bit ("... ip=1;cat+flag.txt") then forward the request => "... HTB{1n73rc3p73d_1n_7h3_m1ddl3}"
 
     [!] Answer: "HTB{1n73rc3p73d_1n_7h3_m1ddl3}"
-
-
-************************************************************************************************************************************************************************************************************************************************************
 
 
 [Repeating Requests]
@@ -71,18 +69,15 @@
     [!] Answer: "HTB{qu1ckly_r3p3471n6_r3qu3575}"
 
 
-************************************************************************************************************************************************************************************************************************************************************
-
-
 [Encoding/Decoding]
 
 [*] Attached file: "encoded_flag.zip"
 
-[Question 1] The string found in the attached file has been encoded several times with various encoders. Try to use the decoding tools we discussed to decode it and get the flag.
+[Question 1] The string found in the attached file has been encoded several times with various encoders.
 
     [Step 1] Download and Extract the "encoded_flag.zip"
 
-        => "VTJ4U1VrNUZjRlZXVkVKTFZrWkdOVk5zVW10aFZYQlZWRmh3UzFaR2NITlRiRkphWld0d1ZWUllaRXRXUm10M1UyeFNUbVZGY0ZWWGJYaExWa1V3ZVZOc1VsZGlWWEJWVjIxNFMxWkZNVFJUYkZKaFlrVndWVmR0YUV0V1JUQjNVMnhTYTJGM1BUMD0="
+        => "VTJ4U1VrNUZjRlZXVkVKTFZrWkdOV...dWVmR0YUV0V1JUQjNVMnhTYTJGM1BUMD0="
 
     [Step 2] Using any hash identifier then decode until it's done
 
@@ -91,12 +86,10 @@
     [!] Answer: "HTB{3nc0d1n6_n1nj4}"
 
 
-************************************************************************************************************************************************************************************************************************************************************
-
-
 [Proxying Tools]
  
-[Question 1]  Try running 'auxiliary/scanner/http/http_put' in Metasploit on any website, while routing the traffic through Burp. Once you view the requests sent, what is the last line in the request?
+[Question 1]  Try running 'auxiliary/scanner/http/http_put' in Metasploit on any website, while routing the traffic through Burp. 
+              Once you view the requests sent, what is the last line in the request?
 
     [Step 1] Configure proxy for "auxiliary/scanner/http/http_put"
 
@@ -116,9 +109,6 @@
             msf test file
 
     [!] Answer: "msf test file"
-
-
-************************************************************************************************************************************************************************************************************************************************************
 
 
 [Burp Intruder]
@@ -147,9 +137,6 @@
         => "... HTB{burp_1n7rud3r_fuzz3r!} ..."
 
     [!] Answer: "HTB{burp_1n7rud3r_fuzz3r!}"
-
-
-************************************************************************************************************************************************************************************************************************************************************
 
 
 [ZAP Fuzzer]
@@ -209,20 +196,19 @@
     [!] Answer: "HTB{fuzz1n6_my_f1r57_c00k13}"
 
 
-************************************************************************************************************************************************************************************************************************************************************
-
-
 [ZAP Scanner]
 
 [*] Target: 157.245.41.35:30156
 
-[Question 1] Run ZAP Scanner on the target above to identify directories and potential vulnerabilities. Once you find the high-level vulnerability, try to use it to read the flag at '/flag.txt'
+[Question 1] Run ZAP Scanner on the target above to identify directories and potential vulnerabilities. 
+             Once you find the high-level vulnerability, try to use it to read the flag at '/flag.txt'
 
     -   Go to Dashboard > "New scan", then there are 2 options for you to choose
 
         [?] Crawl: Allows you to automatically browse and map the structure of a website.
 
-        [?] Crawl and audit: Not only visit each page on the website and identify all the links and resources associated with it, but it will also test each page for vulnerabilities based on the scan configuration you set up
+        [?] Crawl and audit: Not only visit each page on the website and identify all the links and resources associated with it, 
+                             but it will also test each page for vulnerabilities based on the scan configuration you set up
 
     => In this case you should choose "Crawl and audit" and then enter the target in "URLs to Scan"
 
@@ -230,7 +216,7 @@
 
     Request:
 
-        GET /devtools/ping.php?ip=127.0.0.1%7cecho%20fgamcctnhf%207mc3hjzdi1%7c%7ca%20%23'%20%7cecho%20fgamcctnhf%207mc3hjzdi1%7c%7ca%20%23%7c%22%20%7cecho%20fgamcctnhf%207mc3hjzdi1%7c%7ca%20%23 HTTP/1.1
+        GET /devtools/ping.php?ip=127.0.0.1%7cecho%20f....di1%7c%7ca%20%23 HTTP/1.1
         Host: 157.245.41.35:30156
         Accept-Encoding: gzip, deflate
         Accept: */*
@@ -264,9 +250,6 @@
     [!] Answer: HTB{5c4nn3r5_f1nd_vuln5_w3_m155}
 
 
-************************************************************************************************************************************************************************************************************************************************************
-
-
 [Skills Assessment - Using Web Proxies]
 
 [*] Target: 157.245.38.221:31961
@@ -289,11 +272,16 @@
 
         => "... <button class='btn block-cube block-cube-hover' id='submit' type='submit' formmethod='post' name='getflag' value='true'> ..."
 
-    -   Intercepting this request and send it to Repeater => you know the HTB flag's concept right, so you need to search for "HTB{" in the response search bar => Try to send until you see "1 matched" => "... HTB{d154bl3d_bu770n5_w0n7_570p_m3} ..."
+    -   Intercepting this request and send it to Repeater 
+    
+        => You know the HTB flag's concept right, so you need to search for "HTB{" in the response search bar 
+        
+        => Try to send until you see "1 matched" => "... HTB{d154bl3d_bu770n5_w0n7_570p_m3} ..."
 
     [!] Answer: "HTB{d154bl3d_bu770n5_w0n7_570p_m3}"
 
-[Question 2] The /admin.php page uses a cookie that has been encoded multiple times. Try to decode the cookie until you get a value with 31 characters. Submit the value as the answer.
+[Question 2] The /admin.php page uses a cookie that has been encoded multiple times. 
+             Try to decode the cookie until you get a value with 31 characters. Submit the value as the answer.
 
     [Step 1] Intercepting the request to /admin.php
 
@@ -304,10 +292,10 @@
             Accept-Language: en-US,en;q=0.5
             Accept-Encoding: gzip, deflate
             Connection: close
-            Cookie: PHPSESSID=mgh9l3ii94eppedb4nme1ojsuq; cookie=4d325268597a6b7a596a686a5a4449314d4746684f474d7859544d325a6d5a6d597a63355954453359513d3d
+            Cookie: PHPSESSID=mgh9l3ii94eppedb4nme1ojsuq; cookie=4d325268597a6b7a596...a63355954453359513d3d
             Upgrade-Insecure-Requests: 1
 
-        => "4d325268597a6b7a596a686a5a4449314d4746684f474d7859544d325a6d5a6d597a63355954453359513d3d" is the thing we need
+        => "4d325268597a6b7a596...a63355954453359513d3" is the thing we need
 
     [Step 2] Using the Hash Intruder tool then decode until it's done
 
@@ -337,7 +325,8 @@
 
     [!] Answer: "HTB{burp_1n7rud3r_n1nj4!}"
 
-[Question 4] You are using the 'auxiliary/scanner/http/coldfusion_locale_traversal' tool within Metasploit, but it is not working properly for you. You decide to capture the request sent by Metasploit so you can manually verify it and repeat it. 
+[Question 4] You are using the 'auxiliary/scanner/http/coldfusion_locale_traversal' tool within Metasploit, 
+             but it is not working properly for you. You decide to capture the request sent by Metasploit so you can manually verify it and repeat it. 
              Once you capture the request, what is the 'XXXXX' directory being called in '/XXXXX/administrator/..'?
 
     [Step 1] Set proxies for auxiliary/scanner/http/coldfusion_locale_traversal

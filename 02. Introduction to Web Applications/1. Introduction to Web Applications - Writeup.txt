@@ -11,9 +11,6 @@
     [!] Answer: "<img>"
 
 
-************************************************************************************************************************************************************************************************************************************************************
-
-
 [Cascading Style Sheets (CSS)]
 
 [Question 1] What is the CSS "property: value" used to make an HTML element's text aligned to the left?
@@ -25,9 +22,6 @@
     [!] Answer: "text-align: left;" 
 
 
-************************************************************************************************************************************************************************************************************************************************************
-
-
 [Sensitive Data Exposure]
 
 [*] Target: 138.68.170.86:32535
@@ -37,9 +31,6 @@
     -   Go to view-source:http://138.68.170.86:32535/ => "... <!-- TODO: remove test credentials admin:HiddenInPlainSight --> ..."
 
     [!] Answer: "HiddenInPlainSight"
-
-
-************************************************************************************************************************************************************************************************************************************************************
 
 
 [HTML Injection]
@@ -70,12 +61,11 @@
 
     =>  If I entered "Hung Thinh Tran" => "... <p id="output">Your name is Hung Thinh Tran</p> ..."
 
-    =>  When I entered "<a href="http://www.hackthebox.com">Click Me</a>"  => "... <p id="output">Your name is <a href="http://www.hackthebox.com">Click Me</a></p> ..."
+    =>  When I entered "<a href="http://www.hackthebox.com">Click Me</a>"  
+    
+    => "... <p id="output">Your name is <a href="http://www.hackthebox.com">Click Me</a></p> ..."
 
     [!] Answer: "Your name is Click Me"
-
-
-************************************************************************************************************************************************************************************************************************************************************
 
 
 [Cross-Site Scripting (XSS)]
@@ -108,12 +98,10 @@
 
         [?] "onerror" event handler is called whenever a JavaScript error occurs, allowing you to handle the error and prevent the script from crashing.
 
-        [?] Because "/phantom_path" does not exist so "src=/phantom_path" will be an error, "onerror" appears to handle this by running "alert(document.cookie)"
+        [?] Because "/phantom_path" does not exist so "src=/phantom_path" will be an error, 
+            "onerror" appears to handle this by running "alert(document.cookie)"
 
     [!] Answer: "XSSisFun"  
-
-
-************************************************************************************************************************************************************************************************************************************************************
 
 
 [Back End Servers]
@@ -135,9 +123,6 @@
     [!] Answer: "WAMP"
 
 
-************************************************************************************************************************************************************************************************************************************************************
-
-
 [Web Servers]
 
 [Question 1]  If a web server returns an HTTP code 201, what does it stand for?
@@ -148,11 +133,7 @@
 
         [?] 201 Created: This response code is sent when a new resource has been successfully created on the server.
 
-        [?] 204 No Content: This response code is used to indicate that the server has successfully processed the request, but there is no content to return.
-
         [?] 301 Moved Permanently: This response code is used to indicate that the requested resource has been permanently moved to a new location.
-
-        [?] 302 Found: This response code is used to indicate that the requested resource has been temporarily moved to a new location.
 
         [?] 400 Bad Request: This response code is sent when the server is unable to understand the request due to malformed syntax or invalid parameters.
 
@@ -165,9 +146,6 @@
         [?] 500 Internal Server Error: This response code is sent when the server encounters an unexpected condition that prevents it from fulfilling the request.
 
     [!] Answer: "Created"
-
-
-************************************************************************************************************************************************************************************************************************************************************
 
 
 [Databases]
@@ -200,9 +178,6 @@
     [!] Answer: "NoSQl"
 
 
-************************************************************************************************************************************************************************************************************************************************************
-
-
 [Development Frameworks & APIs]
 
 [*] Target: 157.245.38.221:31557
@@ -220,9 +195,6 @@
         superadmin
 
     [!] Answer: "superadmin"
-
-
-************************************************************************************************************************************************************************************************************************************************************
 
 
 [Common Web Vulnerabilities]
@@ -243,18 +215,15 @@
         
             =>  Allow attackers to directly execute commands on the back-end server and gain control over it.
 
-        [?] SQL Injection (SQLi) is another very common vulnerability in web applications, which may occur when the web application executes a SQL query, including a value taken from user-supplied input.
+        [?] SQL Injection (SQLi) is another very common vulnerability in web applications, which may occur when the web application executes a SQL query.
 
             =>  Allow attackers to gather sensitive information in the database(s)
 
-    -   CVE-2014-6271, also known as "Shellshock," allows remote attackers to execute arbitrary code on the targeted system by exploiting a flaw in Bash's handling of environment variables
+    -   CVE-2014-6271, also known as "Shellshock," allows remote attackers to execute arbitrary code on the targeted system
         
         => This vulnerability belongs to Command Injection
 
     [!] Answer: "Command Injection" 
-
-
-************************************************************************************************************************************************************************************************************************************************************
 
 
 [Public Vulnerabilities]

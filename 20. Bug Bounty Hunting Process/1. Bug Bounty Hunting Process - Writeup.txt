@@ -5,9 +5,6 @@
 - This is my honor to guide you guys. Again "You made it! Great job"
 
 
-************************************************************************************************************************************************************************************************************************************************************
-
-
 [Bug Bounty Programs]
 
 [Question 1] Which Bug Bounty Program part establishes expectations for behavior while participating in a bug bounty program?
@@ -23,9 +20,6 @@
         [+] HackerOne's Code of Conduct: The recommendation is made to review HackerOne's Code of Conduct, which is likely a comprehensive document that covers guidelines and expectations for bug bounty hunters. Familiarizing oneself with such documents can provide valuable insights and ensure adherence to industry standards.   
 
     [!] Answer: "Code of Conduct"
-
-
-************************************************************************************************************************************************************************************************************************************************************
 
 
 [Writing a Good Report]

